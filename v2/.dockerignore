@@ -1,0 +1,7 @@
+**/node_modules
+**/dist
+**/__pycache__
+**/*.pyc
+backend/.pytest_cache
+backend/*.db
+backend/smoke_cgv.py

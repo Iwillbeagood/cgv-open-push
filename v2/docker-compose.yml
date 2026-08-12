@@ -1,0 +1,19 @@
+services:
+  cgv-open-push:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # 빌드 시 호스트 환경변수에서 주입(값은 git에 안 남음). 없으면 빈 값.
+        VITE_DEFAULT_WEBHOOK: "${VITE_DEFAULT_WEBHOOK:-}"
+    ports:
+      - "8000:8000"
+    environment:
+      CGV_POLL_INTERVAL: "300"   # 폴링 주기(초)
+      CGV_HEADLESS: "1"
+    volumes:
+      - cgv-data:/data           # SQLite 영속화
+    restart: unless-stopped
+
+volumes:
+  cgv-data:
